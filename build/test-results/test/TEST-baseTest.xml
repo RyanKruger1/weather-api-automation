@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="baseTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-07-28T16:39:34" hostname="RYANKR-LP" time="0.007">
+  <properties/>
+  <testcase name="runBasic" classname="baseTest" time="0.007"/>
+  <system-out><![CDATA[This is a before test
+this is a test
+This is an after test
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
