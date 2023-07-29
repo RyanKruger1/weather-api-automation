@@ -1,0 +1,7 @@
+{
+  "resourceDetails": {
+    "url": "https://pfa.foreca.com",
+    "basePath": "/api/v1/",
+    "authBasePath": "/authorize"
+  }
+}
