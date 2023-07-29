@@ -5,5 +5,10 @@
     "authPath": "/authorize",
     "authUsername": "ryankruger45",
     "authPassword": "2BYATO3f23dG"
+  },
+  "forecastData": {
+    "commonCityName": "Paris",
+    "uniqueCityName": "Paarl",
+    "nonExistentCityName": "RyanBedRoom"
   }
 }
