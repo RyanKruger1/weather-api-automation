@@ -1,7 +1,9 @@
 {
   "resourceDetails": {
     "url": "https://pfa.foreca.com",
-    "basePath": "/api/v1/",
-    "authBasePath": "/authorize"
+    "path": "/api/v1/",
+    "authPath": "/authorize",
+    "authUsername": "ryankruger45",
+    "authPassword": "2BYATO3f23dG"
   }
 }

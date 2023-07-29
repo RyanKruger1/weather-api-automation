@@ -2,9 +2,9 @@ package Forecast;
 
 import jdk.jfr.Description;
 import org.apache.http.HttpStatus;
-import org.core.BaseAPIClient;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
+import org.weatherapp.core.BaseAPIClient;
 
 import static io.restassured.RestAssured.given;
 

@@ -1,4 +1,4 @@
-package org.core;
+package org.weatherapp.core;
 
 import org.json.simple.JSONObject;
 

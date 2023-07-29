@@ -1,4 +1,4 @@
-package org.core;
+package org.weatherapp.core;
 
 import com.google.gson.JsonObject;
 import io.restassured.RestAssured;
