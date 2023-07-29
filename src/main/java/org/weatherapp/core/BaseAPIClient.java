@@ -3,7 +3,6 @@ package org.weatherapp.core;
 import com.google.gson.JsonObject;
 import io.restassured.RestAssured;
 import io.restassured.http.Header;
-import lombok.Getter;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 
@@ -15,12 +14,11 @@ import static io.restassured.RestAssured.given;
 public class BaseAPIClient {
 
     protected static JsonReader jsonReader = new JsonReader();
-    @Getter
     protected static JsonObject testData;
     protected static Header authHeader;
     protected static JsonObject resourceDetails;
+    protected static JsonObject forecastDetails;
     protected static CommonObjects commonObject = new CommonObjects();
-
     protected static String username;
     protected static String password;
 
@@ -28,9 +26,13 @@ public class BaseAPIClient {
     @BeforeClass
     public static void setup() throws IOException {
         testData = jsonReader.readConfigData();
+
         resourceDetails = testData.getAsJsonObject("resourceDetails");
+        forecastDetails = testData.getAsJsonObject("forecastData");
+
         username = resourceDetails.get("authUsername").getAsString();
         password = resourceDetails.get("authPassword").getAsString();
+
         RestAssured.baseURI = resourceDetails.get("url").getAsString();
         authHeader = getAuthHeader();
         setForecastBasePath();

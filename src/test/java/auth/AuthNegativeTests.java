@@ -1,6 +1,6 @@
-package Auth;
+package auth;
 
-import jdk.jfr.Description;
+import io.qameta.allure.Description;
 import org.apache.http.HttpStatus;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;

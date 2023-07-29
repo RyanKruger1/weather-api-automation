@@ -1,4 +1,4 @@
-package Auth;
+package auth;
 
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.response.ValidatableResponse;
