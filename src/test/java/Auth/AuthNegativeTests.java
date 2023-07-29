@@ -2,16 +2,15 @@ package Auth;
 
 import jdk.jfr.Description;
 import org.apache.http.HttpStatus;
-import org.core.BaseAPIClient;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import org.weatherapp.core.BaseAPIClient;
 
 @Test
 public class AuthNegativeTests extends BaseAPIClient {
 
     public final String INVALID_USERNAME = "invalid_username";
     public final String INVALID_PASSWORD = "invalid_password";
-    public final String INVALID_BEARER = "Bearer this_is_invalid";
     protected AuthCommonMethods authCommonMethods = new AuthCommonMethods();
 
     @BeforeMethod

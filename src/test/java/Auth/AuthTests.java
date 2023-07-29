@@ -1,15 +1,11 @@
 package Auth;
 
-
 import jdk.jfr.Description;
 import org.apache.http.HttpStatus;
-import org.core.BaseAPIClient;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
+import org.weatherapp.core.BaseAPIClient;
 
 @Test
 public class AuthTests extends BaseAPIClient {
@@ -24,29 +20,28 @@ public class AuthTests extends BaseAPIClient {
     }
 
     @Description("As an API User, I attempt to create a expiring-token.")
-    public void expiringCreateTest() {
+    public void expiringTokenCreationTest() {
 
         authCommonMethods.
                 createExpiringToken(validAuthObject).
                 assertThat().
                 statusCode(HttpStatus.SC_OK).
-                body("access_token", notNullValue()).
-                body("expires_in", is(7200)).
-                body("token_type", is("bearer"));
+                spec(authCommonMethods.getExpiringTokenResponseModel());
     }
 
     @Description("As an API User, I attempt to create a non-expiring-token, find it and delete it.")
-    public void nonExpiringCreateTest() {
+    public void nonExpiringTokenCreationTest() {
 
         authCommonMethods.
                 createNonExpiringToken(validAuthObject).
                 assertThat().
                 statusCode(HttpStatus.SC_OK).
-                spec(authCommonMethods.getExpiringTokenResponseModel());
+                spec(authCommonMethods.getNonExpiringTokenResponseModel());
 
         String tokenId = authCommonMethods.
                 getAllNonExpiryTokens(validAuthObject).
-                assertThat().statusCode(HttpStatus.SC_OK).
+                assertThat().
+                statusCode(HttpStatus.SC_OK).
                 extract().
                 jsonPath().getString("tokens[0].key");
 

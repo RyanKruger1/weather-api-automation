@@ -55,10 +55,20 @@ public class AuthCommonMethods {
                 log().all();
     }
 
-    public ResponseSpecification getExpiringTokenResponseModel() {
+    public ResponseSpecification getNonExpiringTokenResponseModel() {
         ResponseSpecBuilder responseSpecBuilder = new ResponseSpecBuilder();
         responseSpecBuilder.expectBody("access_token", notNullValue());
         responseSpecBuilder.expectBody("expires_in", nullValue());
+        responseSpecBuilder.expectBody("token_type", is("bearer"));
+        responseSpecBuilder.expectStatusCode(HttpStatus.SC_OK);
+
+        return responseSpecBuilder.build();
+    }
+
+    public ResponseSpecification getExpiringTokenResponseModel() {
+        ResponseSpecBuilder responseSpecBuilder = new ResponseSpecBuilder();
+        responseSpecBuilder.expectBody("access_token", notNullValue());
+        responseSpecBuilder.expectBody("expires_in", notNullValue());
         responseSpecBuilder.expectBody("token_type", is("bearer"));
         responseSpecBuilder.expectStatusCode(HttpStatus.SC_OK);
 

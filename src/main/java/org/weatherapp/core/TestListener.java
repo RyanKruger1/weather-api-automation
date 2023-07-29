@@ -1,4 +1,4 @@
-package org.core;
+package org.weatherapp.core;
 
 import org.testng.ITestContext;
 import org.testng.ITestListener;
