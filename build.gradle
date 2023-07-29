@@ -1,5 +1,12 @@
 plugins {
     id 'java'
+    id 'io.qameta.allure' version '2.11.2'
+}
+
+allure {
+    report {
+        reportDir.set(project.rootProject.file("allure-results"))
+    }
 }
 
 group 'org.example'
@@ -14,7 +21,7 @@ dependencies {
     implementation group: 'org.testng', name: 'testng', version: '7.8.0'
     implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.15.2'
-    implementation group: 'io.rest-assured', name: 'rest-assured', version: '5.3.0'
+    implementation group: 'io.rest-assured', name: 'rest-assured', version: '5.3.1'
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.28'
     implementation group: 'io.qameta.allure', name: 'allure-testng', version: '2.23.0'
 }
