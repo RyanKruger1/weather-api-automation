@@ -1,6 +1,7 @@
 package org.weatherapp.core;
 
 import com.google.gson.JsonObject;
+import io.qameta.allure.testng.AllureTestNg;
 import io.restassured.RestAssured;
 import io.restassured.http.Header;
 import org.testng.annotations.BeforeClass;
@@ -10,7 +11,7 @@ import java.io.IOException;
 
 import static io.restassured.RestAssured.given;
 
-@Listeners(TestListener.class)
+@Listeners(AllureTestNg.class)
 public class BaseAPIClient {
 
     protected static JsonReader jsonReader = new JsonReader();

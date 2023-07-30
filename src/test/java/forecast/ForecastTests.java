@@ -23,7 +23,7 @@ public class ForecastTests extends BaseAPIClient {
     }
 
     @Description("As an API user, I attempt to retrieve the daily forecast information for a uniquely named city.")
-    public void retrieveTodayForecastInformation() {
+    public void retrieveTodayForecastInformationTest() {
         forecastCommonMethods.getDailyForecast(authHeader, location).
                 statusCode(HttpStatus.SC_OK).
                 assertThat().
@@ -31,7 +31,7 @@ public class ForecastTests extends BaseAPIClient {
     }
 
     @Description("As an API user, I attempt to retrieve the hourly forecast information for a uniquely named city.")
-    public void retrieveHourlyForecastInformation() {
+    public void retrieveHourlyForecastInformationTest() {
         forecastCommonMethods.getHourlyForecast(authHeader, location).
                 statusCode(HttpStatus.SC_OK).
                 assertThat().
