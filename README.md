@@ -43,13 +43,13 @@ On Mac machine you can run:
 A test report can be generated of the last completed test run. Running command:
 `gradlew allureReport` or `./gradlew allureReport` respectively, will create the report.
 
-The report will be saved into a generated folder named _test-output_. T
+The report will be saved into a generated folder named _test-output_. The
 index.html is the main entry-point to the report which is best viewed in Chrome browser.
 
 ## Postman
 
 The postman collection utilizes environment variables to keep track of all the information used in the collection.
-It also requires the username and password received from Foreca, to Authenticate all API calls.
+It also requires the username and password received from Foreca to Authenticate all API calls.
 The place of entry can be found in the environment variables section of postman after importing. The fields requiring
 user data entry has been marked accordingly.
 
