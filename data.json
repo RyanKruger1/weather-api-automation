@@ -9,6 +9,6 @@
   "forecastData": {
     "commonCityName": "Paris",
     "uniqueCityName": "Paarl",
-    "nonExistentCityName": "RyanBedRoom"
+    "nonExistentCityName": "1234"
   }
 }
