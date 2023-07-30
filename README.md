@@ -48,7 +48,7 @@ index.html is the main entry-point to the report which is best viewed in Chrome 
 
 ## Postman
 
-The postman collection utilizes environment variables to keep track of all the information used in the collection.
+The Postman collection utilizes environment variables to keep track of all the information used in the collection.
 It also requires the username and password received from Foreca to Authenticate all API calls.
 The place of entry can be found in the environment variables section of postman after importing. The fields requiring
 user data entry has been marked accordingly.
