@@ -1,0 +1,867 @@
+{
+  "info": {
+    "_postman_id": "ec468cf4-1bd8-4f44-b259-175fa277f1c1",
+    "name": "WeatherAPI",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "28716241"
+  },
+  "item": [
+    {
+      "name": "Forecasts",
+      "item": [
+        {
+          "name": "Get Location",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUri}}/api/v1/location/search/Nairobi",
+              "host": [
+                "{{baseUri}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "location",
+                "search",
+                "Nairobi"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Location",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"retreive location id\", function () {\r",
+                  "    var jsonData = pm.response.json();\r",
+                  "    pm.environment.set(\"location_id\", jsonData.locations[0].id);\r",
+                  "});\r",
+                  "\r",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUri}}/api/v1/location/search/Paarl",
+              "host": [
+                "{{baseUri}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "location",
+                "search",
+                "Paarl"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Forecast",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUri}}/api/v1/forecast/daily/{{location_id}}",
+              "host": [
+                "{{baseUri}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "forecast",
+                "daily",
+                "{{location_id}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "token",
+            "value": "{{access_token}}",
+            "type": "string"
+          }
+        ]
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Forecasts Negative Test",
+      "item": [
+        {
+          "name": "get-location-invalid-location",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Empty array check\", function () {\r",
+                  "    var jsonData = pm.response.json();\r",
+                  "    pm.expect(jsonData.locations).has.length(0);\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "url": {
+              "raw": "{{baseUri}}/api/v1/location/search/21312312",
+              "host": [
+                "{{baseUri}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "location",
+                "search",
+                "21312312"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get-location-no-token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 401\", function () {\r",
+                  "    pm.response.to.have.status(401);\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "url": {
+              "raw": "{{baseUri}}/api/v1/location/search/Paris",
+              "host": [
+                "{{baseUri}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "location",
+                "search",
+                "Paris"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get-forecast-invalid-location-id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 400\", function () {\r",
+                  "    pm.response.to.have.status(400);\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUri}}/api/v1/forecast/daily/Barcelona",
+              "host": [
+                "{{baseUri}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "forecast",
+                "daily",
+                "Barcelona"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "token",
+            "value": "{{access_token}}",
+            "type": "string"
+          }
+        ]
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Create non-expiring token",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Export access_token\", function () {\r",
+                  "    var jsonData = pm.response.json();\r",
+                  "    pm.environment.set(\"access_token\", jsonData.access_token);\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"user\": \"{{username}}\",\r\n    \"password\": {{password}}\r\n}",
+              "options": {
+                "raw": {
+                  "language": "text"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUri}}/authorize/token?expire_hours=700",
+              "host": [
+                "{{baseUri}}"
+              ],
+              "path": [
+                "authorize",
+                "token"
+              ],
+              "query": [
+                {
+                  "key": "expire_hours",
+                  "value": "700"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create expiring token",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Your test name\", function () {\r",
+                  "    var jsonData = pm.response.json();\r",
+                  "    pm.environment.set(\"access_token\", jsonData.access_token);\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"user\": \"{{username}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUri}}/authorize/token?expire_hours=2",
+              "host": [
+                "{{baseUri}}"
+              ],
+              "path": [
+                "authorize",
+                "token"
+              ],
+              "query": [
+                {
+                  "key": "expire_hours",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Retreive non-expiring tokens",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Save key\", function () {\r",
+                  "    var jsonData = pm.response.json();\r",
+                  "    pm.environment.set(\"key\", jsonData.tokens.key);\r",
+                  "});\r",
+                  "\r",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"user\": \"{{username}}\",\r\n    \"password\": \"{{password}}\"\r\n}"
+            },
+            "url": {
+              "raw": "{{baseUri}}/authorize/key",
+              "host": [
+                "{{baseUri}}"
+              ],
+              "path": [
+                "authorize",
+                "key"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete non-expiring tokens",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 204\", function () {\r",
+                  "    pm.response.to.have.status(204);\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"user\": \"{{username}}\",\r\n    \"password\": \"{{password}}\"\r\n}"
+            },
+            "url": {
+              "raw": "{{baseUri}}/authorize/key/{{key}}",
+              "host": [
+                "{{baseUri}}"
+              ],
+              "path": [
+                "authorize",
+                "key",
+                "{{key}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Auth Negative Test",
+      "item": [
+        {
+          "name": "get-information-from-dissalowed-service",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUri}}/api/v1/warning/:location",
+              "host": [
+                "{{baseUri}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "warning",
+                ":location"
+              ],
+              "variable": [
+                {
+                  "key": "location",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "create-non-expiring-token-invalid-credentials",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 401\", function () {\r",
+                  "    pm.response.to.have.status(401);\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"user\": \"xxxxxxxxxxxxxx\", \r\n\"password\": \"zzzzzzzzzzz\"}"
+            },
+            "url": {
+              "raw": "{{baseUri}}/authorize/token?expire_hours=-1",
+              "host": [
+                "{{baseUri}}"
+              ],
+              "path": [
+                "authorize",
+                "token"
+              ],
+              "query": [
+                {
+                  "key": "expire_hours",
+                  "value": "-1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "create-expiring-token-invalid-credentials",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 401\", function () {\r",
+                  "    pm.response.to.have.status(401);\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"user\": \"xxxxxxxxxxxx\", \r\n\"password\": \"6BYATO3f23dG\"}"
+            },
+            "url": {
+              "raw": "{{baseUri}}/authorize/token?expire_hours=2",
+              "host": [
+                "{{baseUri}}"
+              ],
+              "path": [
+                "authorize",
+                "token"
+              ],
+              "query": [
+                {
+                  "key": "expire_hours",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "retreive-non-expiring-tokens-invalid-credentials",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 401\", function () {\r",
+                  "    pm.response.to.have.status(401);\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUri}}/authorize/key",
+              "host": [
+                "{{baseUri}}"
+              ],
+              "path": [
+                "authorize",
+                "key"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete-non-expiring-tokens-invalid-credentials",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 401\", function () {\r",
+                  "    pm.response.to.have.status(401);\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n\"user\": \"xddqsadsa\", \r\n\"password\": \"xkxkkdkkmdking\"\r\n}"
+            },
+            "url": {
+              "raw": "{{baseUri}}/authorize/key/{{access_token}}",
+              "host": [
+                "{{baseUri}}"
+              ],
+              "path": [
+                "authorize",
+                "key",
+                "{{access_token}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete-invalid-auth-token",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 406\", function () {\r",
+                  "    pm.response.to.have.status(406);\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"user\": \"ryankruger45\", \r\n\"password\": \"2BYATO3f23dG\"}"
+            },
+            "url": {
+              "raw": "{{baseUri}}/authorize/key/123456789",
+              "host": [
+                "{{baseUri}}"
+              ],
+              "path": [
+                "authorize",
+                "key",
+                "123456789"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Set Collection Access Token",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Export access_token\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.environment.set(\"access_token\", jsonData.access_token);\r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"user\": \"{{username}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "text"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUri}}/authorize/token?expire_hours=700",
+          "host": [
+            "{{baseUri}}"
+          ],
+          "path": [
+            "authorize",
+            "token"
+          ],
+          "query": [
+            {
+              "key": "expire_hours",
+              "value": "700"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{access_token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}

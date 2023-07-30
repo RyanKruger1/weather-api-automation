@@ -5,7 +5,7 @@ plugins {
 
 allure {
     report {
-        reportDir.set(project.rootProject.file("allure-results"))
+        reportDir.set(file('test-report'))
     }
 }
 

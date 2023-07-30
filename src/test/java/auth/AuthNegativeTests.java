@@ -40,7 +40,6 @@ public class AuthNegativeTests extends BaseAPIClient {
                 statusCode(HttpStatus.SC_UNAUTHORIZED);
     }
 
-
     @Description("As an API User, I attempt to create a non-expiring-token using invalid credentials.")
     public void nonExpiringTokenInvalidCredentialsTest() {
         authCommonMethods.
