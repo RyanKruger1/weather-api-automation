@@ -3,8 +3,8 @@
     "url": "https://pfa.foreca.com",
     "path": "/api/v1/",
     "authPath": "/authorize",
-    "authUsername": "ryankruger45",
-    "authPassword": "2BYATO3f23dG"
+    "authUsername": "YOUR_USERNAME_GOES_HERE",
+    "authPassword": "YOUR_PASSWORD_GOES_HERE"
   },
   "forecastData": {
     "commonCityName": "Paris",

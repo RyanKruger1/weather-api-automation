@@ -23,7 +23,6 @@ public class BaseAPIClient {
     protected static String username;
     protected static String password;
 
-
     @BeforeClass
     public static void setup() throws IOException {
         testData = jsonReader.readConfigData();
@@ -41,7 +40,6 @@ public class BaseAPIClient {
 
     protected static Header getAuthHeader() {
         setAuthBasePath();
-
 
         String accessToken = given().
                 body(commonObject.getAuthRequestModel(username, password)).
